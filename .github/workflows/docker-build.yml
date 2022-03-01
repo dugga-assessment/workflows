@@ -17,7 +17,7 @@ on:
         required: true
         type: string
       cache-from:
-        required: true
+        required: false
         type: string
     secrets:
       username:
