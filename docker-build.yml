@@ -33,7 +33,7 @@ jobs:
       - name: Build docker image
         run: |
           docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} --build-arg BUILD_COMMAND=build-test -f Dockerfile .
-image
+
       - name: Push docker image
         run: |
           docker push ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }}
