@@ -28,7 +28,7 @@ jobs:
         run: | 
           env
           echo "${{ inputs.build-args }}" > ${{ runner.temp }}/build-args.env
-          echo "REF=${{ github.ref.name }}" >> ${{ runner.temp }}/build-args.env
+          echo "REF=${{ github.ref }}" >> ${{ runner.temp }}/build-args.env
 
       - name: Login to ${{ inputs.repository }}
         uses: docker/login-action@v1
