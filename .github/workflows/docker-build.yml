@@ -27,6 +27,7 @@ jobs:
       - name: Setup build args
         run: | 
           echo "${{ inputs.build-args }}" > /tmp/build-args.env
+          echo "${{ GITHUB_REF_NAME }}" >> /tmp/build-args.env
 
       - name: Login to ${{ inputs.repository }}
         uses: docker/login-action@v1
