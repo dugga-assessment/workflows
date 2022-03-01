@@ -31,9 +31,17 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build docker image
+        description: Pushes docker image to specified registry
+        branding:
+          icon: 'upload-cloud'
+          color: 'layers'
         run: |
           docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} --build-arg BUILD_COMMAND=build-test -f Dockerfile .
 
       - name: Push docker image
+        description: Pushes docker image to specified registry
+        branding:
+          icon: 'upload-cloud'
+          color: 'purple'
         run: |
           docker push ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }}
