@@ -45,7 +45,7 @@ jobs:
       - name: Pull docker build cache
         run: |
           while read image; do
-             docker pull "$image"
+             docker pull "$image" || /bin/true
           done < ${{ runner.temp }}/cache-from.env
 
       - uses: actions/checkout@v2
