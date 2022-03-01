@@ -10,6 +10,9 @@ on:
       repository:
         required: true
         type: string
+      build-args:
+        required: true
+        type: string
     secrets:
       username:
         required: true
@@ -21,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup build args
+        run: | 
+          echo "${{ inputs.build-args }}" > /tmp/build-args.env
+
       - name: Login to ${{ inputs.repository }}
         uses: docker/login-action@v1
         with:
@@ -32,7 +39,9 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} --build-arg BUILD_COMMAND=build-test -f Dockerfile .
+          docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} \
+          $(cat /tmp/build-args.env | sed 's@^@--build-arg @g' | paste -s -d " ") \
+          -f Dockerfile .
 
       - name: Push docker image
         run: |
