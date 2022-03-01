@@ -39,7 +39,7 @@ jobs:
           docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} --build-arg BUILD_COMMAND=build-test -f Dockerfile .
 
       - name: Push docker image
-        description: Pushes docker image to specified registry
+        description: Pushes docker ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }}
         branding:
           icon: 'upload-cloud'
           color: 'purple'
