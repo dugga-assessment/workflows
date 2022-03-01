@@ -55,7 +55,7 @@ jobs:
           docker build -t ${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.tag }} \
           $(cat ${{ runner.temp }}/build-args.env | sed 's@^@--build-arg @g' | paste -s -d " ") \
           $(cat ${{ runner.temp }}/cache-from.env | sed 's@^@--cache-from @g' | paste -s -d " ") \
-          $([[ ! -z "${{ inputs.target }}" ]] && echo "--target ${{ inputs.target }}")
+          $([[ ! -z "${{ inputs.target }}" ]] && echo "--target ${{ inputs.target }}") \
           -f Dockerfile .
 
       - name: Push docker image
